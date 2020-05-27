@@ -1,0 +1,29 @@
+.button {
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
+}
+
+.row {
+  margin: 15px;
+}
+
+.inputLabel {
+  display: inline-block;
+  width:70px;
+  vertical-align: top;
+  margin-top: 5px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.inputBox {
+  width: 200px;
+}
+
+.note {
+  width: 509px;
+}

@@ -7,7 +7,7 @@ const {Search} = Input;
 
 class TransactionSheet extends React.Component {
   componentDidMount() {
-    fetch('http://localhost:3000/transaction')
+    fetch('http://localhost:3000/transactions')
     .then(response => response.json())
     .then(data => this.setState( {dataSource: data.sort((a, b) => moment(b.created).unix() - moment(a.created).unix())} ));
   }
@@ -85,18 +85,26 @@ class TransactionSheet extends React.Component {
     })
       .then(response => response.json())
       
-    
     this.setState({
       dataSource: this.state.dataSource.filter(item => item.id !== key),
     });
   };
+
+  searchTransaction = (value: any) => {
+    fetch(`http://localhost:3000/transactions?value=${value}`, {
+      method: 'get',
+      headers: {'Content-Type': 'application/json'},
+    })
+      .then(response => response.json())
+      .then(data => this.setState( {dataSource: data.sort((a, b) => moment(b.created).unix() - moment(a.created).unix())} ));
+  }
 
   render() {
     return (
       <div className={styles.container}>
         <Search
           placeholder="search transactions"
-          onSearch={value => console.log(value)}
+          onSearch={value => this.searchTransaction(value)}
           enterButton
           size="large"
           className={styles.searchBox}
@@ -111,7 +119,7 @@ class TransactionSheet extends React.Component {
           // }}
           scroll={{ y: 400}}
           pagination={{ pageSize: 10}}
-          bordered
+          
         />
       </div>
       

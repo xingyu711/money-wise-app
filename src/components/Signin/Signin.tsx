@@ -19,8 +19,13 @@ const Signin = () => {
     })
       .then(response => response.json())
       .then(user => {
-        if (user.id) {
-          history.push('/')
+        if (user.user_id) {
+          history.push({
+            pathname: '/',
+            state: {
+              user_id: user.user_id,
+            }
+          })
         } else {
           console.log('failed')
         }

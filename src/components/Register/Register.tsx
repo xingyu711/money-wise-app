@@ -21,7 +21,6 @@ const pwdRequirement = (
 
 const Register = () => {
   const [form] = Form.useForm();
-
   const onFinish = (values: any) => {
     console.log(values);
     fetch('http://localhost:3000/register', {
@@ -36,8 +35,8 @@ const Register = () => {
     })
       .then(response => response.json())
       .then(user => {
-        if (user.id) {
-          if (user.id) {
+        if (user.user_id) {
+          if (user.user_id) {
             history.goBack();
           } else {
             console.log('failed')

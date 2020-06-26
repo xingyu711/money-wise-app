@@ -47,6 +47,7 @@ const expenseCategories: Category[] = [
       { displayName: 'Gas' },
       { displayName: 'Internet' },
       { displayName: 'Phone' },
+      { displayName: 'Rentals' },
       { displayName: 'Water' }
     ]
   },
@@ -178,10 +179,12 @@ class AddTransaction extends React.Component {
 
   handleAddIncome = () => {
     const { category, amount, currency, created, note} = this.state.form;
+    console.log(this.props)
     fetch('http://localhost:3000/transaction', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
+        user_id: this.props.userId,
         basic_type: 'income',
         category: category,
         amount: amount,
@@ -189,8 +192,9 @@ class AddTransaction extends React.Component {
         created: created,
         note: note
       })
-    })
-      .then(response => response.json())
+    }).then(response => {
+      this.props.loadTransactions();
+    });
 
     this.setState({
       visibleIncome: false,
@@ -204,6 +208,7 @@ class AddTransaction extends React.Component {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
+        user_id: this.props.userId,
         basic_type: 'expense',
         category: category,
         amount: amount,
@@ -212,7 +217,9 @@ class AddTransaction extends React.Component {
         note: note
       })
     })
-      .then(response => response.json())
+      .then(response => {
+        this.props.loadTransactions();
+      })
 
     this.setState({
       visibleIncome: false,
@@ -311,8 +318,6 @@ class AddTransaction extends React.Component {
                   filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 >
                   <Option value="usd">USD</Option>
-                  <Option value="cny">CNY</Option>
-                  <Option value="jyp">JPY</Option>
                 </Select>
               </div>
             </Col>
@@ -395,8 +400,6 @@ class AddTransaction extends React.Component {
                   filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 >
                   <Option value="usd">USD</Option>
-                  <Option value="cny">CNY</Option>
-                  <Option value="jyp">JPY</Option>
                 </Select>
               </div>
             </Col>

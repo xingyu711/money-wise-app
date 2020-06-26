@@ -7,21 +7,42 @@ import logo from './logoText.png';
 
 const {Item, SubMenu} = Menu;
 
-const Navigation = ({tab}: {tab: string}) => {
+const Navigation = ({tab, userId}: {tab: string, userId: number}) => {
   const toOverview = () => {
-    history.push('/');
+    history.push({
+      pathname: '/',
+      state: {
+        user_id: userId,
+      }
+    });
   };
 
   const toTransactions = () => {
-    history.push('/transactions'); 
+    console.log(userId)
+    history.push({
+      pathname: '/transactions',
+      state: {
+        user_id: userId,
+      }
+    });
   }
 
   const toReports = () => {
-    history.push('/reports');
+    history.push({
+      pathname: '/reports',
+      state: {
+        user_id: userId,
+      }
+    });
   }
 
   const toSettings = () => {
-    history.push('/settings');
+    history.push({
+      pathname: '/settings',
+      state: {
+        user_id: userId,
+      }
+    });
   }
 
   const toSignOut = () => {
@@ -29,7 +50,12 @@ const Navigation = ({tab}: {tab: string}) => {
   }
 
   const toContactUs = () => {
-    history.push('/contactus');
+    history.push({
+      pathname: '/contactus',
+      state: {
+        user_id: userId,
+      }
+    });
   }
 
   return (

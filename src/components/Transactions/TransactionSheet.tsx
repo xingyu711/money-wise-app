@@ -1,4 +1,5 @@
 import { Input, Table, Popconfirm } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
 import styles from './TransactionSheet.css';
 import moment from 'moment';
@@ -6,10 +7,11 @@ import moment from 'moment';
 const {Search} = Input;
 
 class TransactionSheet extends React.Component {
-  componentDidMount() {
-    fetch('http://localhost:3000/transactions')
-    .then(response => response.json())
-    .then(data => this.setState( {dataSource: data.sort((a, b) => moment(b.created).unix() - moment(a.created).unix())} ));
+  componentWillReceiveProps(nextProps) {
+    const {transactions} = nextProps;
+    this.setState({
+      dataSource: transactions,
+    });
   }
 
   columns = [
@@ -17,7 +19,7 @@ class TransactionSheet extends React.Component {
       title: 'Type',
       dataIndex: 'basic_type',
       key: 'basic_type',
-      width: '10%',
+      width: '12%',
       filters: [
         { text: 'Income', value: 'income' },
         { text: 'Expense', value: 'expense' },
@@ -31,18 +33,18 @@ class TransactionSheet extends React.Component {
       key: 'category',
     },
     {
-      title: 'Currency',
-      dataIndex: 'currency',
-      key: 'currency',
-      width: '12%',
-      render: (value) => value.toUpperCase(),
-    },
-    {
       title: 'Amount',
       key: 'amount',
       dataIndex: 'amount',
       width: '12%',
       sorter: (a, b) => a.amount - b.amount,
+    },
+    {
+      title: 'Currency',
+      dataIndex: 'currency',
+      key: 'currency',
+      width: '12%',
+      render: (value) => value.toUpperCase(),
     },
     {
       title: 'Date',
@@ -59,14 +61,15 @@ class TransactionSheet extends React.Component {
       width: '23%',
     },
     {
-      title: 'Actions',
       dataIndex: 'actions',
       key: 'actions',
-      render: (text, record) =>
+      render: (text, record) => 
         this.state.dataSource.length >= 1 ? (
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-            <a>Delete</a>
-          </Popconfirm>
+          <span>
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <DeleteOutlined />
+            </Popconfirm>
+          </span> 
         ) : null,
     },
   ];
@@ -80,18 +83,18 @@ class TransactionSheet extends React.Component {
       method: 'delete',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        id: key
+        transaction_id: key
       })
     })
       .then(response => response.json())
       
     this.setState({
-      dataSource: this.state.dataSource.filter(item => item.id !== key),
+      dataSource: this.state.dataSource.filter(item => item.transaction_id !== key),
     });
   };
 
   searchTransaction = (value: any) => {
-    fetch(`http://localhost:3000/transactions?value=${value}`, {
+    fetch(`http://localhost:3000/transactions/${this.props.userId}?value=${value}`, {
       method: 'get',
       headers: {'Content-Type': 'application/json'},
     })
@@ -111,7 +114,7 @@ class TransactionSheet extends React.Component {
         />
         <Table
           columns = {this.columns}
-          dataSource = {this.state.dataSource.map((entry, i) => ({...entry, key: entry.id}))}
+          dataSource = {this.state.dataSource.map((entry, i) => ({...entry, key: entry.transaction_id}))}
           className={styles.table}
           // expandable={{
           //   expandedRowRender: record => <p>Note: {record.note}</p>,
@@ -119,7 +122,6 @@ class TransactionSheet extends React.Component {
           // }}
           scroll={{ y: 400}}
           pagination={{ pageSize: 10}}
-          
         />
       </div>
       

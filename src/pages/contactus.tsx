@@ -6,12 +6,11 @@ import Navigation from '../components/Common/Navigation';
 const {Content, Footer } = Layout;
 
 export default () => {
-  const {user_id} = history.state.state;
 
   return (
     <div className={styles.container}>
       <Layout>
-        <Navigation tab={'contactus'} userId={user_id}/>
+        <Navigation tab={'contactus'}/>
         <Layout>
           <Content className={styles.content}>Reports Page</Content>
         </Layout>

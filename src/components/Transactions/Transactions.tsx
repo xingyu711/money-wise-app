@@ -19,7 +19,7 @@ export default class Transactions extends React.Component {
   }
 
   loadTransactions = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/transactions/${userId}`)
     .then(response => response.json())
     .then(data => {
@@ -30,23 +30,22 @@ export default class Transactions extends React.Component {
   }
 
   render() {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     const {transactions} = this.state;
 
     return (
       <div className={styles.container}>
         <Layout>
-          <Navigation tab={'transactions'} userId={userId}/>
+          <Navigation tab={'transactions'}/>
           <Layout>
             <Content className={styles.content}>
               <div className={styles.center}>
-                <TransactionSheet userId={userId} transactions={transactions}/>
+                <TransactionSheet transactions={transactions}/>
               </div>
             </Content>
           </Layout>
-          <Footer>Footer</Footer>
         </Layout>
-        <AddTransaction userId={userId} loadTransactions={this.loadTransactions}/>
+        <AddTransaction loadTransactions={this.loadTransactions}/>
       </div>
     );
   }

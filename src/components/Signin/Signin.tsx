@@ -18,13 +18,12 @@ const Signin = () => {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user.user_id) {
+      .then(data => {
+        if (data) {
+          window.sessionStorage.setItem('user_id', data.user_id);
+          window.sessionStorage.setItem('token', data.token);
           history.push({
             pathname: '/',
-            state: {
-              user_id: user.user_id,
-            }
           })
         } else {
           console.log('failed')

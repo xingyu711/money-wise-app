@@ -11,7 +11,8 @@ export default defineConfig({
     { path: '/transactions', component: '@/pages/transactions' },
     { path: '/reports', component: '@/pages/reports' },
     { path: '/settings', component: '@/pages/settings' },
-    { path: '/contactus', component: '@/pages/contactus'}
+    { path: '/contactus', component: '@/pages/contactus'},
+    { path: '/about', component: '@/pages/about'}
   ],
   theme: {
     "primary-color": "#846267"

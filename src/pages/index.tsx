@@ -7,15 +7,14 @@ import Overview from '../components/Home/Overview';
 const { Header, Content, Sider, Footer } = Layout;
 
 export default () => {
-  const {user_id} = history.state.state;
   
   return (
     <div className={styles.container}>
       <Layout>
-        <Navigation tab={'overview'} userId={user_id}/>
+        <Navigation tab={'overview'}/>
         <Layout>
           <Content className={styles.content}>
-            <Overview userId={user_id}/>
+            <Overview/>
           </Content>
           <Sider width={'20%'} className={styles.sider}>Sider</Sider>
         </Layout>

@@ -94,7 +94,8 @@ class TransactionSheet extends React.Component {
   };
 
   searchTransaction = (value: any) => {
-    fetch(`http://localhost:3000/transactions/${this.props.userId}?value=${value}`, {
+    const userId = window.sessionStorage.getItem('user_id');
+    fetch(`http://localhost:3000/transactions/${userId}?value=${value}`, {
       method: 'get',
       headers: {'Content-Type': 'application/json'},
     })
@@ -120,8 +121,8 @@ class TransactionSheet extends React.Component {
           //   expandedRowRender: record => <p>Note: {record.note}</p>,
           //   rowExpandable: record => record.note !== null,
           // }}
-          scroll={{ y: 400}}
-          pagination={{ pageSize: 10}}
+          // scroll={{ y: 400}}
+          pagination={{ pageSize: 7}}
         />
       </div>
       

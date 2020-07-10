@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Button, DatePicker, Dropdown, Menu, Modal, Input, Select, TreeSelect, Row, Col } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styles from './AddTransaction.css';
+import { create } from 'lodash';
 
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
@@ -179,12 +180,12 @@ class AddTransaction extends React.Component {
 
   handleAddIncome = () => {
     const { category, amount, currency, created, note} = this.state.form;
-    console.log(this.props)
+    console.log(created)
     fetch('http://localhost:3000/transaction', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        user_id: this.props.userId,
+        user_id: window.sessionStorage.getItem('user_id'),
         basic_type: 'income',
         category: category,
         amount: amount,
@@ -208,7 +209,7 @@ class AddTransaction extends React.Component {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        user_id: this.props.userId,
+        user_id: window.sessionStorage.getItem('user_id'),
         basic_type: 'expense',
         category: category,
         amount: amount,

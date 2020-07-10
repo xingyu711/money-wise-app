@@ -58,7 +58,7 @@ export default class Overview extends React.Component {
   }
 
   getUserInfo = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/user/${userId}`)
       .then(response => response.json())
       .then(data => {
@@ -73,7 +73,7 @@ export default class Overview extends React.Component {
   }
 
   getNumTransactions = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/num_transactions/${userId}`)
       .then(response => response.json())
       .then(data => {
@@ -84,7 +84,7 @@ export default class Overview extends React.Component {
   }
 
   getNumIncome = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/num_income/${userId}`)
       .then(response => response.json())
       .then(data => {
@@ -95,7 +95,7 @@ export default class Overview extends React.Component {
   }
 
   getNumExpense = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/num_expense/${userId}`)
       .then(response => response.json())
       .then(data => {
@@ -106,7 +106,7 @@ export default class Overview extends React.Component {
   }
 
   getSumIncome = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/sum_income/${userId}`)
       .then(response => response.json())
       .then(data => {
@@ -117,7 +117,7 @@ export default class Overview extends React.Component {
   }
 
   getSumExpense = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/sum_expense/${userId}`)
       .then(response => response.json())
       .then(data => {
@@ -128,7 +128,7 @@ export default class Overview extends React.Component {
   }
 
   getWeeklyIncome = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/weekly_income/${userId}`)
       .then(response => response.json())
       .then(value => {
@@ -139,7 +139,7 @@ export default class Overview extends React.Component {
   }
 
   getWeeklyExpense = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/weekly_expense/${userId}`)
       .then(response => response.json())
       .then(value => {
@@ -150,7 +150,7 @@ export default class Overview extends React.Component {
   }
 
   getMonthlyIncome = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/monthly_income/${userId}`)
       .then(response => response.json())
       .then(value => {
@@ -161,7 +161,7 @@ export default class Overview extends React.Component {
   }
 
   getMonthlyExpense = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/monthly_expense/${userId}`)
       .then(response => response.json())
       .then(value => {
@@ -172,7 +172,7 @@ export default class Overview extends React.Component {
   }
 
   getYearlyIncome = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/yearly_income/${userId}`)
       .then(response => response.json())
       .then(value => {
@@ -183,7 +183,7 @@ export default class Overview extends React.Component {
   }
 
   getYearlyExpense = () => {
-    const {userId} = this.props;
+    const userId = window.sessionStorage.getItem('user_id');
     fetch(`http://localhost:3000/yearly_expense/${userId}`)
       .then(response => response.json())
       .then(value => {
